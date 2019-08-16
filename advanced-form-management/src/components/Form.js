@@ -54,7 +54,12 @@ const NewUserFormik = withFormik({
             password: Yup.string().required().min(8, 'password must be 8 characters long'),
             tos: Yup.bool().required('Must Accept Terms Of Service to proceed')
         }
-    )
+    ),
+    handleSubmit(values){
+        axios.post('https://reqres.in/api/users', values)
+            .then(res => console.log('Posted successfully: ', res))
+            .catch(err => console.log('ERROR: ', err));
+    }
 })(NewUser);
 
 export default NewUserFormik;
